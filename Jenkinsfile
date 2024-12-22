@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        AWS_ACCESS_KEY_ID = credentials('AWS_CREDENTIALS')
-        AWS_SECRET_ACCESS_KEY = credentials('AWS_CREDENTIALS')
+        AWS_ACCESS_KEY_ID = credentials('aws_creds')
+        AWS_SECRET_ACCESS_KEY = credentials('aws_creds')
     }
     parameters {
         choice(name: 'ENVIRONMENT', choices: ['dev', 'staging', 'prod'], description: 'Choose the environment')
