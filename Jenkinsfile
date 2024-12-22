@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        AWS_ACCESS_KEY_ID = credentials('aws_creds')
-        AWS_SECRET_ACCESS_KEY = credentials('aws_creds')
+        AWS_ACCESS_KEY_ID = credentials('AWS_CREDENTIALS')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_CREDENTIALS')
     }
     parameters {
         choice(name: 'ENVIRONMENT', choices: ['dev', 'staging', 'prod'], description: 'Choose the environment')
@@ -16,7 +16,8 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 sh '''
-                terraform init -backend-config="bucket=abhishekjonty121" \
+                terraform init -reconfigure \
+								-backend-config="bucket=abhishekjonty121" \
                                -backend-config="key=env/${ENVIRONMENT}/terraform.tfstate" \
                                -backend-config="region=ap-south-1" \
                                -backend-config="dynamodb_table=terraform-lock-table"
