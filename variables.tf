@@ -17,3 +17,8 @@ variable "region" {
   description = "AWS region"
   type        = string
 }
+
+variable "ami" {
+  description = "AMI id"
+  type        = string
+}
