@@ -32,7 +32,14 @@ pipeline {
             }
         }
         
-		stage('Terraform Destroy') {
+		stage('Terraform Apply') {
+            steps {
+                sh '''
+                terraform apply -auto-approve -var-file=${ENVIRONMENT}.tfvars
+                '''
+            }
+        }
+		stage('Terraform destroy') {
             steps {
                 sh '''
                 terraform destroy -auto-approve -var-file=${ENVIRONMENT}.tfvars
